@@ -1,0 +1,7 @@
+# Ignore datasets and large runs
+datasets/
+runs/
+*.mp4
+*.pt
+__pycache__/
+.DS_Store
