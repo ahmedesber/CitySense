@@ -6,24 +6,26 @@
 
 * **Edge AI Detection:** Optimized **YOLOv8 Nano** model for real-time inference on edge devices.
 * **High Accuracy:** Validated with a peak **0.87 F1-score** on custom training sets.
-* **Field Tested:** Successfully validated using real-world mobile footage from **Seyrantepe (Kağıthane), Istanbul**.
-* **Automated Reporting:** Generates instant `city_report.txt` logs with timestamps and confidence scores for every detection.
+* **Global Field Testing:** Successfully validated using real-world mobile footage from both **Seyrantepe (Kağıthane), Istanbul** and **Fujairah, UAE**.
+* **Automated Reporting:** Generates instant `detections.json` logs with timestamps and confidence scores for every detection.
 * **5G Ready:** Designed for high-speed, low-latency data transmission to central management dashboards.
 
 ## 📊 Performance Metrics
 
 The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned for urban environments.
 
-* **Model Architecture:** YOLOv8n (Nano)
-* **F1-Score:** 0.87 (Peak)
-* **Inference Speed:** Optimized for real-time mobile deployment
+* **Model Architecture:** YOLOv8n (Nano).
+* **F1-Score:** 0.87 (Peak).
+* **Real-World Reliability:** Consistent **96% average confidence** during field validation tests.
+
+
 
 ## 🛠️ Tech Stack
 
-* **Language:** Python 3.10+
-* **Frameworks:** PyTorch, Ultralytics (YOLOv8)
-* **Computer Vision:** OpenCV
-* **Data Analysis:** Pandas, NumPy
+* **Language:** Python 3.10+.
+* **Frameworks:** PyTorch, Ultralytics (YOLOv8).
+* **Computer Vision:** OpenCV.
+* **Frontend:** React-based management dashboard.
 
 ## 💻 Getting Started
 
@@ -32,30 +34,45 @@ The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned fo
 Clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/[your-username]/CitySense.git
+git clone [https://github.com/](https://github.com/)[your-username]/CitySense.git
 cd CitySense
 pip install -r requirements.txt
 
-```
+2. Running Inference (CLI)
 
-### 2. Running Inference
+The system features a professional Command Line Interface (CLI). You can run the detection on any video source with custom thresholds directly from the terminal:
+# Basic usage
+python main.py --source data/test_video.mp4
 
-To run the detection system on a video source:
+# Advanced usage with custom weights and confidence threshold
+python main.py --source data/fujairah_drive.mp4 --weights models/best.pt --conf 0.5
 
-```bash
-python main.py --source path/to/video.mp4
+3. Coordinate Pathing Utility
 
-```
+For static test footage, use our path simulation utility to generate dynamic GPS trails for the dashboard visualization:
+python fix_path.py
 
-## 📅 Project Roadmap
+📂 Data Management Note
+Due to GitHub's 100MB file size limit, the full raw image datasets and weight files are hosted on Google Drive.
 
-* [x] Initial training on RDD2022 dataset (0.87 F1-score)
-* [x] Real-world field testing in Seyrantepe
-* [ ] Development of React-based management dashboard
-* [ ] Integration with Turkcell 5G Simulation Environment
-* [ ] Final Submission for Turkcell Tech Leaders Competition (Feb 15)
+Weights: Located in the /models directory on GitHub or the shared Drive link.
 
-## 👥 The Team
+Datasets: For access to the full RDD2022 augmented set, please use the provided Google Drive link.
 
-* **Ahmad Esber** – Machine Learning Engineer (İstinye University)
-* **Tarik** – Systems Integration & Backend (İstinye University, 3rd Year)
+📅 Project Roadmap
+[x] Initial training on RDD2022 dataset (0.87 F1-score).
+
+[x] Real-world field testing in Seyrantepe, Istanbul.
+
+[x] International environmental testing in Fujairah, UAE.
+
+[x] Development of professional CLI inference tool.
+
+[ ] Integration with Turkcell 5G Simulation Environment.
+
+[ ] Final Submission for Turkcell Tech Leaders Competition (Feb 15).
+
+👥 The Team
+Ahmad Esber – Machine Learning Engineer (İstinye University).
+
+Tariq – Systems Integration & Frontend (İstinye University).
