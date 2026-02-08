@@ -1,4 +1,4 @@
-🛣️ CitySense: Real-Time Road Monitoring with Edge AI & 5G
+#🛣️ CitySense: Real-Time Road Monitoring with Edge AI & 5G
 CitySense is an end-to-end Smart City infrastructure solution designed to automate road damage detection. Using YOLOv8 at the edge and leveraging 5G low-latency networks, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
 
 🚀 Key Features
