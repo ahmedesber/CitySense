@@ -5,7 +5,7 @@
 
 **CitySense** is a production-grade Smart City infrastructure solution designed to automate road damage detection. By deploying **YOLOv8** at the edge and leveraging **5G low-latency networks**, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
 
-> **Top:** Real-time detection in Seyrantepe, Istanbul. **Bottom:** High-contrast validation in Fujairah, UAE.
+> **Field Validation:** Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
 
 ---
 
@@ -13,11 +13,11 @@
 
 ### 📡 5G-Enabled Edge Intelligence
 
-Optimized for the **Turkcell 5G Simulation Environment**, CitySense utilizes Ultra-Reliable Low-Latency Communication (URLLC). This reduces "Detection-to-Dashboard" latency to **sub-20ms**, enabling near-instantaneous reporting from high-speed municipal vehicles.
+Optimized for high-speed mobile environments, CitySense utilizes **5G Ultra-Reliable Low-Latency Communication (URLLC)**. This reduces the "Detection-to-Dashboard" latency to **sub-20ms**, enabling near-instantaneous reporting from moving municipal vehicles.
 
 ### 🧠 Edge AI Detection
 
-Utilizes a fine-tuned **YOLOv8 Nano** model, specifically chosen for its high throughput and low computational footprint on edge hardware (e.g., Jetson Nano, mobile devices).
+Utilizes a fine-tuned **YOLOv8 Nano** model, specifically chosen for its high throughput and low computational footprint on edge hardware (e.g., Jetson Nano, mobile devices, and IoT gateways).
 
 ### 🌍 Multi-Environment Validation
 
@@ -35,24 +35,31 @@ Successfully validated across diverse urban topographies:
 
 ```
 
-1. **Ingestion:** Real-time video stream processed at the source.
-2. **Inference:** YOLOv8n identifies damage classes (Pothole, Longitudinal Crack, etc.).
-3. **Transmission:** Detections are pushed via 5G to the central server.
-4. **Visualization:** Data is rendered on a Mapbox-powered heat map for city engineers.
+---
+
+## 📂 External Assets (Large Files)
+
+To keep the repository lightweight and efficient, our high-precision models and training datasets are hosted externally:
+
+* 📥 **[Download CitySense Assets (Models & Datasets)](https://drive.google.com/drive/folders/1AIfIqyCbBTHCANjXbXII_jTsfHdNpa6C?usp=share_link)**
+* **Includes:** Fine-tuned `best.pt`, `best.onnx` weights, and the full augmented RDD2022 dataset.
+* **Setup:** Place downloaded weights in the `/models` directory and raw footage in the `/data` directory.
+
+
 
 ---
 
 ## 📈 Performance Metrics
 
-The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned for urban environments.
+The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned for diverse urban asphalt conditions.
 
 ### Mathematical Validation
 
-We optimized the harmonic mean of Precision and Recall to ensure no critical damage is overlooked:
+We optimized the harmonic mean of Precision and Recall to ensure high sensitivity to road hazards:
 
 * **F1-Score:** 0.87 (Peak)
 * **Average Confidence:** 96%
-* **Inference Speed:** ~12ms per frame (on 5G edge-node simulation)
+* **Inference Speed:** ~12ms per frame
 
 ---
 
@@ -64,7 +71,7 @@ We optimized the harmonic mean of Precision and Recall to ensure no critical dam
 | **Inference** | PyTorch, Ultralytics (YOLOv8) |
 | **Computer Vision** | OpenCV |
 | **Frontend** | React (Central Dashboard) |
-| **Network** | 5G URLLC Simulation (Turkcell) |
+| **Network** | 5G URLLC Simulation (Turkcell optimized) |
 
 ---
 
@@ -107,8 +114,6 @@ python main.py --source data/video.mp4 --weights models/best.pt --conf 0.65
 
 ```
 
-> ⚠️ **Note on Model Weights:** Due to GitHub's file size limits, the high-precision `.pt` files are hosted on Google Drive. Download them [HERE] and place them in the `/models` directory.
-
 ---
 
 ## 📈 Impact & Sustainability
@@ -138,6 +143,6 @@ python main.py --source data/video.mp4 --weights models/best.pt --conf 0.65
 
 ### 📜 Acknowledgments
 
-Special thanks to the creators of the **RDD2022 (Road Damage Dataset)** for the foundational training data.
+Special thanks to the creators of the **RDD2022 (Road Damage Dataset)** for providing the foundational training data.
 
 ---
