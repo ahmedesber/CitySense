@@ -1,49 +1,51 @@
-from ultralytics import YOLO
 import cv2
-import time
-import json  # Essential for the data bridge
+import json
+import argparse
+from ultralytics import YOLO
 
+def run_detection():
+    # --- CLI Setup ---
+    # This section allows you to run: python main.py --source "fujairah_test.mp4"
+    parser = argparse.ArgumentParser(description="CitySense Pothole Detection Tool")
+    parser.add_argument("--source", type=str, default="test_video.mp4", help="Path to input video file")
+    parser.add_argument("--weights", type=str, default="models/best.pt", help="Path to YOLO weights file")
+    parser.add_argument("--conf", type=float, default=0.25, help="Confidence threshold (0.0 to 1.0)")
+    args = parser.parse_args()
 
-def process_walking_video(video_name):
-    # Load the model from your new clean path
-    model = YOLO('models/best.pt')
-    cap = cv2.VideoCapture(video_name)
+    # --- Load Model ---
+    # Using your weights that hit the 0.87 F1-score
+    model = YOLO(args.weights)
+    print(f"🚀 Starting CitySense Detection on: {args.source}")
 
-    # Check if video actually opened
-    if not cap.isOpened():
-        print("❌ Error: Could not find the video file!")
-        return
-
+    # --- Process Video ---
+    results = model.predict(source=args.source, conf=args.conf, save=False, stream=True)
+    
     all_detections = []
-    print(f"🕵️ Analyzing: {video_name}")
+    
+    # Static coordinates for the current test (Seyrantepe location)
+    # We will update these later with real GPS data from your Fujairah drive
+    LAT = 41.0965 
+    LNG = 28.9852
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        # Use a slightly lower confidence (0.25) to ensure we get data
-        results = model.predict(frame, conf=0.25, verbose=False)
-
-        for box in results[0].boxes:
-            timestamp = time.strftime("%H:%M:%S")
-
-            # Create the structured data for the dashboard
-            detection_entry = {
-                "type": "pothole",
+    for i, r in enumerate(results):
+        for box in r.boxes:
+            detection_data = {
+                "id": len(all_detections) + 1,
                 "confidence": round(float(box.conf[0]), 2),
-                "timestamp": timestamp,
-                # Seyrantepe placeholder
-                "location": {"lat": 41.0965, "lng": 28.9852}
+                "location": {
+                    "lat": LAT,
+                    "lng": LNG
+                },
+                "timestamp": str(i) # Frame index as a simple timestamp
             }
-            all_detections.append(detection_entry)
+            all_detections.append(detection_data)
 
-            # Save the JSON file immediately so it doesn't stay empty []
-            with open("detections.json", "w") as f:
-                json.dump(all_detections, f, indent=4)
+    # --- Save Results ---
+    with open("detections.json", "w") as f:
+        json.dump(all_detections, f, indent=4)
+    
+    print(f"✅ Finished! Found {len(all_detections)} detections.")
+    print(f"📁 Data saved to detections.json. Now run 'python fix_path.py' to spread the coordinates.")
 
-    cap.release()
-    print("📋 Success! Check 'detections.json' for the data.")
-
-
-process_walking_video('my_walk.mp4')
+if __name__ == "__main__":
+    run_detection()
