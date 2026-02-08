@@ -1,14 +1,24 @@
-# Core Machine Learning & Vision
-ultralytics>=8.0.0
-opencv-python>=4.8.0
-torch>=2.0.0
-torchvision>=0.15.0
+# --- Core Machine Learning & Vision ---
+# Using the stable YOLOv8 framework
+ultralytics>=8.1.0
+torch>=2.1.0
+torchvision>=0.16.0
 
-# Data Processing
-pandas
-numpy
+# Headless version is preferred for Edge/Server environments (no GUI dependency)
+opencv-python-headless>=4.8.0
 
-# Utilities
-matplotlib
-tqdm
-PyYAML
+# --- Data Processing ---
+# Pinning NumPy to avoid compatibility issues with recent 2.x releases
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0
+
+# --- Utilities & Visualization ---
+# For GPS pathing simulations and model config handling
+matplotlib>=3.7.0
+PyYAML>=6.0
+tqdm>=4.65.0
+scipy>=1.10.0
+
+# --- 5G Simulation / Dashboard Integration ---
+# (Optional) If you plan to send logs to your React Frontend via API
+requests>=2.31.0
