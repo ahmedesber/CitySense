@@ -1,0 +1,16 @@
+
+=========================================
+      CITYSENSE: ROAD DAMAGE REPORT
+=========================================
+Date/Time: 2026-02-10 20:16:50
+Source: my_walk.mp4
+-----------------------------------------
+STATISTICS:
+- Total Potholes Detected: 140
+- Average Confidence: 51.84%
+- Status: Action Required
+
+LOGS:
+- Data synced to root: detections.json
+- Data synced to frontend: citysense-dash/data/detections.json
+=========================================
