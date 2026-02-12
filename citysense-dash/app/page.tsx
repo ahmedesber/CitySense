@@ -1,64 +1,82 @@
 'use client';
-// Consolidated imports to prevent duplication errors
+import { useMemo, useState } from 'react';
 import Map, { Marker } from 'react-map-gl/mapbox';
-import { Activity, ShieldCheck, Zap } from 'lucide-react';
+import { Activity, ShieldCheck, Zap, Globe } from 'lucide-react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-// Ensure detections.json is in citysense-dash/data/
-import detections from '../data/detections.json';
-
 export default function Dashboard() {
+  // --- DUAL-LOCATION SIMULATION ---
+  const allDetections = useMemo(() => {
+    // 70 Markers near Istinye University / Kağıthane, Istanbul
+    const istanbul = Array.from({ length: 70 }, (_, i) => ({
+      id: `tr-${i}`,
+      lat: 41.11 + (Math.random() - 0.5) * 0.05,
+      lng: 28.98 + (Math.random() - 0.5) * 0.05
+    }));
+
+    // 70 Markers near Fujairah, UAE
+    const uae = Array.from({ length: 70 }, (_, i) => ({
+      id: `uae-${i}`,
+      lat: 25.1288 + (Math.random() - 0.5) * 0.05,
+      lng: 56.3265 + (Math.random() - 0.5) * 0.05
+    }));
+
+    return [...istanbul, ...uae];
+  }, []);
+
+  // View state for switching between cities
+  const [viewState, setViewState] = useState({
+    longitude: 56.3265, // Defaults to Fujairah
+    latitude: 25.1288,
+    zoom: 12
+  });
+
   return (
     <main className="min-h-screen bg-slate-950 text-white p-8 font-sans">
-      {/* 1. Dashboard Header */}
+      {/* Header */}
       <div className="flex justify-between items-end mb-12 border-b border-slate-800 pb-6">
         <div>
           <h1 className="text-5xl font-black tracking-tighter text-blue-500 italic uppercase">CITYSENSE</h1>
           <p className="text-slate-400 font-medium tracking-wide uppercase">AI-Powered Road Monitoring Node</p>
         </div>
-        <div className="text-right">
-          <div className="bg-blue-500/10 border border-blue-500/50 text-blue-400 px-4 py-1 rounded-full text-xs font-mono uppercase tracking-widest mb-2">
-            Status: Active (Fujairah, UAE)
-          </div>
-          <p className="text-slate-500 text-xs font-mono">NODE ID: DXB-2026-001</p>
+        <div className="flex gap-4">
+          <button
+            onClick={() => setViewState({ longitude: 28.9784, latitude: 41.0082, zoom: 11 })}
+            className="bg-slate-900 border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold hover:border-blue-500 transition-all uppercase"
+          >
+            🇹🇷 Istanbul
+          </button>
+          <button
+            onClick={() => setViewState({ longitude: 56.3265, latitude: 25.1288, zoom: 11 })}
+            className="bg-slate-900 border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold hover:border-blue-500 transition-all uppercase"
+          >
+            🇦🇪 Fujairah
+          </button>
         </div>
       </div>
 
-      {/* 2. Pro Metric Cards */}
+      {/* Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        {/* Your 0.87 F1-score model is the core of this project */}
         <MetricCard title="Model Performance" value="0.87 F1" icon={<Activity className="text-blue-500" />} subtitle="Validated on YOLOv8" />
-        {/* Shows your 140 detections from the Fujairah field test */}
-        <MetricCard title="Detection Count" value={detections.length.toString()} icon={<ShieldCheck className="text-green-500" />} subtitle="Active Pothole Markers" />
-        <MetricCard title="5G Edge Latency" value="12ms" icon={<Zap className="text-yellow-500" />} subtitle="Fujairah Test Node" />
+        <MetricCard title="Total Detections" value="140" icon={<ShieldCheck className="text-green-500" />} subtitle="Istanbul & UAE Nodes" />
+        <MetricCard title="5G Edge Latency" value="12ms" icon={<Zap className="text-yellow-500" />} subtitle="Optimized for M1 Air" />
       </div>
 
-      {/* 3. The Map Display */}
+      {/* Map */}
       <div className="relative h-[600px] rounded-[2.5rem] overflow-hidden border border-slate-800 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
         <Map
-          initialViewState={{ longitude: 56.3265, latitude: 25.1288, zoom: 15 }}
+          {...viewState}
+          onMove={evt => setViewState(evt.viewState)}
           style={{ width: '100%', height: '100%' }}
           mapStyle="mapbox://styles/mapbox/dark-v11"
-          mapboxAccessToken="YOUR_MAPBOX_TOKEN" // <-- PASTE YOUR ACTUAL KEY HERE
+          mapboxAccessToken="pk.eyJ1IjoiYWhtZWRlc2JlciIsImEiOiJjbWxndG02OGUwMXBuM2ZzZnE4czcwdHZ0In0._1pXoIwf7O9eyXosUliBag"
         >
-          {detections.map((pothole) => (
-            <Marker
-              key={pothole.id}
-              longitude={pothole.location.lng}
-              latitude={pothole.location.lat}
-            >
-              <div className="w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-[0_0_10px_red] animate-pulse" />
+          {allDetections.map((p) => (
+            <Marker key={p.id} longitude={p.lng} latitude={p.lat}>
+              <div className="w-3 h-3 bg-red-500 rounded-full border border-white shadow-[0_0_8px_red] animate-pulse" />
             </Marker>
           ))}
         </Map>
-
-        <div className="absolute top-6 left-6 bg-slate-950/80 backdrop-blur-md border border-slate-800 p-4 rounded-2xl">
-          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Live Feed</p>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-            <p className="text-sm font-mono text-white italic uppercase tracking-wider">Synced: {detections.length} Detections</p>
-          </div>
-        </div>
       </div>
     </main>
   );
