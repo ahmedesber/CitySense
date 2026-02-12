@@ -5,11 +5,13 @@ import os
 from datetime import datetime
 from ultralytics import YOLO
 
+
 def generate_report(detections, source_name):
     """Generates a professional text summary of the run."""
     total = len(detections)
     # Calculate average confidence for the report
-    avg_conf = sum(d['confidence'] for d in detections) / total if total > 0 else 0.0
+    avg_conf = sum(d['confidence']
+                   for d in detections) / total if total > 0 else 0.0
 
     report_content = f"""
 =========================================
@@ -33,17 +35,23 @@ LOGS:
         f.write(report_content)
     print("📄 Professional city_report.txt generated.")
 
+
 def run_detection():
     # --- CLI Setup ---
-    parser = argparse.ArgumentParser(description="CitySense Pothole Detection Tool")
-    parser.add_argument("--source", type=str, default="my_walk.mp4", help="Path to input video")
-    parser.add_argument("--weights", type=str, default="models/best.pt", help="Path to weights")
-    parser.add_argument("--conf", type=float, default=0.25, help="Confidence threshold")
+    parser = argparse.ArgumentParser(
+        description="CitySense Pothole Detection Tool")
+    parser.add_argument("--source", type=str,
+                        default="my_walk.mp4", help="Path to input video")
+    parser.add_argument("--weights", type=str,
+                        default="models/best.pt", help="Path to weights")
+    parser.add_argument("--conf", type=float, default=0.25,
+                        help="Confidence threshold")
     args = parser.parse_args()
 
     # --- Path Management ---
     # Ensures the frontend sees the data for the Turkcell judges
-    DASHBOARD_DATA_PATH = os.path.join("citysense-dash", "data", "detections.json")
+    DASHBOARD_DATA_PATH = os.path.join(
+        "citysense-dash", "data", "detections.json")
     ROOT_DATA_PATH = "detections.json"
 
     # --- Load Model ---
@@ -54,9 +62,9 @@ def run_detection():
     # --- Process Video ---
     # UPDATED: save=True now creates a video with red boxes for your presentation
     results = model.predict(
-        source=args.source, 
-        conf=args.conf, 
-        save=True, 
+        source=args.source,
+        conf=args.conf,
+        save=True,
         stream=True
     )
 
@@ -78,7 +86,8 @@ def run_detection():
     # This keeps your backend and frontend in sync solo
     for path in [ROOT_DATA_PATH, DASHBOARD_DATA_PATH]:
         try:
-            os.makedirs(os.path.dirname(path), exist_ok=True) if os.path.dirname(path) else None
+            os.makedirs(os.path.dirname(path),
+                        exist_ok=True) if os.path.dirname(path) else None
             with open(path, "w") as f:
                 json.dump(all_detections, f, indent=4)
         except Exception as e:
@@ -87,6 +96,7 @@ def run_detection():
     generate_report(all_detections, args.source)
     print(f"✅ Finished! Found {len(all_detections)} detections.")
     print(f"📂 Check 'runs/detect/' for your visualized output video.")
+
 
 if __name__ == "__main__":
     run_detection()

@@ -1,6 +1,6 @@
 'use client';
 // Consolidated imports to prevent duplication errors
-import { Map, Marker } from 'react-map-gl'; 
+import Map, { Marker } from 'react-map-gl/mapbox';
 import { Activity, ShieldCheck, Zap } from 'lucide-react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -42,16 +42,16 @@ export default function Dashboard() {
           mapboxAccessToken="YOUR_MAPBOX_TOKEN" // <-- PASTE YOUR ACTUAL KEY HERE
         >
           {detections.map((pothole) => (
-            <Marker 
-              key={pothole.id} 
-              longitude={pothole.location.lng} 
+            <Marker
+              key={pothole.id}
+              longitude={pothole.location.lng}
               latitude={pothole.location.lat}
             >
               <div className="w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-[0_0_10px_red] animate-pulse" />
             </Marker>
           ))}
         </Map>
-        
+
         <div className="absolute top-6 left-6 bg-slate-950/80 backdrop-blur-md border border-slate-800 p-4 rounded-2xl">
           <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Live Feed</p>
           <div className="flex items-center gap-2">
