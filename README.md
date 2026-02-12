@@ -7,6 +7,12 @@
 
 > > 🌐 **Live Dashboard:** [city-sense-lac.vercel.app](https://city-sense-lac.vercel.app)
 > **Field Validation:** Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
+> > ## 📂 External Assets (Large Files)
+
+To keep the repository lightweight and efficient, our high-precision models and training datasets are hosted externally:
+
+* 📥 **[Download CitySense Assets (Models & Datasets)](https://drive.google.com/drive/folders/1AIfIqyCbBTHCANjXbXII_jTsfHdNpa6C?usp=share_link)** * **Includes:** Fine-tuned `best.pt`, `best.onnx` weights, and the 50MB **CitySense Video Demo**.
+* **Setup:** Place downloaded weights in the `/models` directory and raw footage in the `/data` directory.
 
 ---
 
