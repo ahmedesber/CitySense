@@ -1,148 +1,52 @@
+🛣️ CitySense: Real-Time Road Monitoring with Edge AI & 5G
+CitySense is a production-grade Smart City infrastructure solution designed to automate road damage detection. By deploying YOLOv8 at the edge and leveraging 5G low-latency networks, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
 
----
+🌐 Live Dashboard: city-sense-one.vercel.app Field Validation: Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
 
-# 🛣️ CitySense: Real-Time Road Monitoring with Edge AI & 5G
+🚀 Key Features
+📡 5G-Enabled Edge Intelligence
 
-**CitySense** is a production-grade Smart City infrastructure solution designed to automate road damage detection. By deploying **YOLOv8** at the edge and leveraging **5G low-latency networks**, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
+Optimized for high-speed mobile environments, CitySense utilizes 5G Ultra-Reliable Low-Latency Communication (URLLC). This reduces the "Detection-to-Dashboard" latency to sub-20ms, enabling near-instantaneous reporting from moving municipal vehicles.
 
-> **Field Validation:** Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
+🧠 Edge AI Detection
 
----
+Utilizes a fine-tuned YOLOv8 Nano model, specifically chosen for its high throughput and low computational footprint on edge hardware (e.g., mobile devices and IoT gateways).
 
-## 🚀 Key Features
-
-### 📡 5G-Enabled Edge Intelligence
-
-Optimized for high-speed mobile environments, CitySense utilizes **5G Ultra-Reliable Low-Latency Communication (URLLC)**. This reduces the "Detection-to-Dashboard" latency to **sub-20ms**, enabling near-instantaneous reporting from moving municipal vehicles.
-
-### 🧠 Edge AI Detection
-
-Utilizes a fine-tuned **YOLOv8 Nano** model, specifically chosen for its high throughput and low computational footprint on edge hardware (e.g., Jetson Nano, mobile devices, and IoT gateways).
-
-### 🌍 Multi-Environment Validation
+🌍 Multi-Environment Validation
 
 Successfully validated across diverse urban topographies:
 
-* **Istanbul, Turkey:** High-density urban testing in Seyrantepe (Kağıthane).
-* **Fujairah, UAE:** High-temperature, high-contrast environment testing.
+Istanbul, Turkey: High-density urban testing in Seyrantepe (Kağıthane).
 
----
+Fujairah, UAE: High-temperature, high-contrast environment testing.
 
-## 🏗️ System Architecture
-
-```text
+🏗️ System Architecture
 [Mobile/Edge Camera] --(YOLOv8 Inference)--> [5G Edge Node] --(URLLC)--> [Cloud Backend] --> [React Dashboard]
 
-```
+📈 Performance Metrics
+The model was trained on the RDD2022 (Road Damage Dataset) and fine-tuned for diverse urban asphalt conditions.
 
----
+Technical Validation
 
-## 📂 External Assets (Large Files)
+F1-Score: 0.87 (Validated Peak)
 
-To keep the repository lightweight and efficient, our high-precision models and training datasets are hosted externally:
+Average Confidence: 96%
 
-* 📥 **[Download CitySense Assets (Models & Datasets)](https://drive.google.com/drive/folders/1AIfIqyCbBTHCANjXbXII_jTsfHdNpa6C?usp=share_link)**
-* **Includes:** Fine-tuned `best.pt`, `best.onnx` weights, and the full augmented RDD2022 dataset.
-* **Setup:** Place downloaded weights in the `/models` directory and raw footage in the `/data` directory.
+Inference Speed: ~12ms per frame (Optimized for M1/Edge hardware)
 
+🛠️ Tech Stack
+Layer,Technology
+Language,"Python 3.10+, TypeScript"
+AI Framework,"YOLOv8 (Ultralytics), PyTorch"
+Frontend,"Next.js 16, React, Mapbox GL"
+Deployment,"Vercel (CI/CD), GitHub"
+Network,Optimized for Turkcell 5G URLLC Simulation
 
+👥 The Engineer
+Ahmad Esber – Lead AI & Full-Stack Engineer (İstinye University)
 
----
+Solo Developer responsible for the full-cycle pipeline: Model training, Data engineering, and Cloud architecture.
 
-## 📈 Performance Metrics
+📜 Acknowledgments
 
-The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned for diverse urban asphalt conditions.
-
-### Mathematical Validation
-
-We optimized the harmonic mean of Precision and Recall to ensure high sensitivity to road hazards:
-
-* **F1-Score:** 0.87 (Peak)
-* **Average Confidence:** 96%
-* **Inference Speed:** ~12ms per frame
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-| --- | --- |
-| **Language** | Python 3.10+ |
-| **Inference** | PyTorch, Ultralytics (YOLOv8) |
-| **Computer Vision** | OpenCV |
-| **Frontend** | React (Central Dashboard) |
-| **Network** | 5G URLLC Simulation (Turkcell optimized) |
-
----
-
-## 📂 Project Structure
-
-```text
-CitySense/
-├── data/               # Sample footage (Seyrantepe/Fujairah)
-├── docs/               # Technical documentation & demo assets
-├── models/             # YOLOv8 weights (best.pt, best.onnx)
-├── src/                
-│   ├── detection/      # Core YOLOv8 inference logic
-│   └── utils/          # fix_path.py & coordinate utilities
-├── main.py             # Professional CLI Entry point
-└── requirements.txt    # Production dependencies
-
-```
-
----
-
-## 💻 Getting Started
-
-### 1. Installation
-
-```bash
-git clone https://github.com/[your-username]/CitySense.git
-cd CitySense
-pip install -r requirements.txt
-
-```
-
-### 2. Running Inference (CLI)
-
-```bash
-# Standard local inference
-python main.py --source data/fujairah_drive.mp4
-
-# High-precision mode with custom weights
-python main.py --source data/video.mp4 --weights models/best.pt --conf 0.65
-
-```
-
----
-
-## 📈 Impact & Sustainability
-
-* **Cost Efficiency:** Reduces manual road inspection costs by up to 60%.
-* **Safety:** Prevents vehicle damage and accidents by accelerating repair cycles.
-* **Longevity:** Predictive maintenance is 10x cheaper than full road resurfacing.
-
----
-
-## 📅 Roadmap & Competition Status
-
-* [x] Model training & 0.87 F1-score achievement.
-* [x] Field testing: Seyrantepe & Fujairah.
-* [x] Development of CLI Inference tool.
-* [ ] **In Progress:** Integration with Turkcell 5G Simulation Environment.
-* [ ] **Target:** Final Submission for Turkcell Tech Leaders (Feb 15).
-
----
-
-## 👥 The Team
-
-* **Ahmad Esber** – Machine Learning Engineer (İstinye University)
-* **Tariq** – Systems Integration & Frontend (İstinye University)
-
----
-
-### 📜 Acknowledgments
-
-Special thanks to the creators of the **RDD2022 (Road Damage Dataset)** for providing the foundational training data.
-
----
+Special thanks to the creators of the RDD2022 (Road Damage Dataset) for providing the foundational training data.
