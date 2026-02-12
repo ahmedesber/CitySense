@@ -5,7 +5,7 @@
 
 **CitySense** is a production-grade Smart City infrastructure solution designed to automate road damage detection. By deploying **YOLOv8** at the edge and leveraging **5G low-latency networks**, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
 
-> 🌐 **Live Dashboard:** [city-sense-one.vercel.app][[(https://www.google.com/search?q=https://city-sense-one.vercel.app)](https://city-sense-lac.vercel.app)](https://city-sense-lac.vercel.app)
+> 🌐 Live Dashboard: city-sense-lac.vercel.app
 > **Field Validation:** Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
 
 ---
