@@ -3,5 +3,8 @@
     "lucide-react": "^0.563.0",
     "mapbox-gl": "^3.18.1",
     "react-map-gl": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/mapbox-gl": "^3.4.1"
   }
 }
