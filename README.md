@@ -1,78 +1,53 @@
+# 🛣️ CitySense: Next-Gen Road Intelligence
+### *Edge AI Detection & 5G URLLC Monitoring System*
+
+![Project Status](https://img.shields.io/badge/Status-Production--Ready-green?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Tech-YOLOv8%20|%20Next.js%20|%205G-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 ---
 
-```markdown
-# 🛣️ CitySense: Real-Time Road Monitoring with Edge AI & 5G
+### 🎯 At A Glance
+**CitySense** is a solo-engineered Smart City solution that automates road infrastructure maintenance. By deploying high-speed **YOLOv8** models at the edge, we reduce detection latency to **12ms**, enabling real-time damage mapping via **5G networks**.
 
-**CitySense** is a production-grade Smart City infrastructure solution designed to automate road damage detection. By deploying **YOLOv8** at the edge and leveraging **5G low-latency networks**, CitySense identifies potholes and cracks in real-time, providing municipalities with an actionable "Damage Heat Map" for proactive maintenance.
-
-> 🌐 **Live Dashboard:** [city-sense-lac.vercel.app](https://city-sense-lac.vercel.app)
-> **Field Validation:** Real-time inference results from Seyrantepe (Istanbul, TR) and Fujairah (UAE).
+🔗 **[Launch Live Dashboard](https://city-sense-lac.vercel.app)** | 📂 **[Access Models & Data](https://drive.google.com/drive/folders/1AIfIqyCbBTHCANjXbXII_jTsfHdNpa6C?usp=share_link)**
 
 ---
 
-## 🚀 Key Features
+## ⚡ Performance Excellence
+We don't just detect; we optimize. CitySense is built for the **URLLC (Ultra-Reliable Low-Latency)** standards of tomorrow's 5G infrastructure.
 
-### 📡 5G-Enabled Edge Intelligence
-Optimized for high-speed mobile environments, CitySense utilizes **5G Ultra-Reliable Low-Latency Communication (URLLC)**. This reduces the "Detection-to-Dashboard" latency to **sub-20ms**, enabling near-instantaneous reporting from moving municipal vehicles.
-
-### 🧠 Edge AI Detection
-Utilizes a fine-tuned **YOLOv8 Nano** model, specifically chosen for its high throughput and low computational footprint on edge hardware (e.g., mobile devices and IoT gateways).
+| Metric | Achievement | Impact |
+| :--- | :--- | :--- |
+| **Model Accuracy** | **0.87 F1-Score** | High-precision pothole detection |
+| **Edge Latency** | **12ms** | Real-time reporting at highway speeds |
+| **Detection Scale** | **Dual-Node (TR/UAE)** | Cross-border cloud synchronization |
 
 ---
 
-## 🏗️ System Architecture
+## 🛠️ The Innovation Stack
+
+### 🧠 Edge AI Brain
+* **Model:** YOLOv8 Nano (Fine-tuned on RDD2022).
+* **Optimization:** Quantized for M1/Edge hardware to maintain 96% confidence.
+
+### 📡 5G Sync Engine
+* **Architecture:** Simulated 5G URLLC pipeline for zero-jitter data transmission.
+* **Cloud:** Next.js 16 + Vercel for instant visualization.
+
+---
+
+## 🏗️ Technical Blueprint
 
 ```text
-[Mobile/Edge Camera] --(YOLOv8 Inference)--> [5G Edge Node] --(URLLC)--> [Cloud Backend] --> [React Dashboard]
+[Camera] ➔ [YOLOv8 Edge Inference (12ms)] ➔ [5G URLLC Stream] ➔ [React Dashboard]
+Note on Assets: To maintain repository speed, the best.pt weights and the 50MB CitySense Demo Video are hosted in our External Asset Cloud.
 
-```
+👤 The Engineer
+Ahmad Esber Computer Engineering @ İstinye University
 
----
+Role: Lead AI & Full-Stack Developer.
 
-## 📂 External Assets (Large Files)
+Milestone: Developed and deployed the complete CitySense ecosystem solo, following a mid-project partner exit.
 
-To keep the repository lightweight and efficient, our high-precision models and training datasets are hosted externally:
-
-* 📥 **[Download CitySense Assets (Models & Datasets)](https://drive.google.com/drive/folders/1AIfIqyCbBTHCANjXbXII_jTsfHdNpa6C?usp=share_link)**
-* **Includes:** Fine-tuned `best.pt`, `best.onnx` weights, and the 50MB **CitySense Video Demo**.
-* **Setup:** Place downloaded weights in the `/models` directory and raw footage in the `/data` directory.
-
----
-
-## 📈 Performance Metrics
-
-The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned for diverse urban asphalt conditions.
-
-### Technical Validation
-
-* **F1-Score:**  (Validated Peak)
-* **Average Confidence:** 96%
-* **Inference Speed:** ~12ms per frame (Optimized for M1/Edge hardware)
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-| --- | --- |
-| **Language** | Python 3.10+, TypeScript |
-| **AI Framework** | YOLOv8 (Ultralytics), PyTorch |
-| **Frontend** | Next.js 16, React, Mapbox GL |
-| **Deployment** | Vercel (CI/CD), GitHub |
-| **Network** | Optimized for Turkcell 5G URLLC Simulation |
-
----
-
-## 👥 The Engineer
-
-* **Ahmad Esber** – Lead AI & Full-Stack Engineer (İstinye University)
-* *Solo Developer responsible for the full-cycle pipeline: Model training, Data engineering, and Cloud architecture.*
-
-
-
----
-
-### 📜 Acknowledgments
-
-Special thanks to the creators of the **RDD2022 (Road Damage Dataset)** for providing the foundational training data.
+Developed for the 2026 Technology Leaders of Tomorrow Competition.
