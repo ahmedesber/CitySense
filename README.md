@@ -76,7 +76,3 @@ The model was trained on the **RDD2022 (Road Damage Dataset)** and fine-tuned fo
 ### 📜 Acknowledgments
 
 Special thanks to the creators of the **RDD2022 (Road Damage Dataset)** for providing the foundational training data.
-
-```
-
----
